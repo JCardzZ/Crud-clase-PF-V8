@@ -15,26 +15,29 @@
                 </p:panelGrid>
             </p:fieldset>
         </h:form>
-        <p:dialog widgetVar="java16" header="Estudiantes" modal="true" resizable="false" showEffect="clip">
+        <p:dialog widgetVar="java16" header="Estudiantes" modal="true" resizable="false" showEffect="clip"> 
+            <p:ajax event="close" listener="#{estudinateManagedBean.limpiarEstudinate()}" update=":es"/>
             <h:form id="es">
                 <p:panelGrid columns="2">
                     <p:outputLabel value="Ingresa nombre"/>
-                    <p:inputText value="#{managedEstudiante.estudiante.nombre}"/>
+                    <p:inputText value="#{estudinateManagedBean.estudiante.nombre}"/>
                     <p:outputLabel value="Ingresa apellido" />
-                    <p:inputText value="#{managedEstudiante.estudiante.apellido}" />
+                    <p:inputText value="#{estudinateManagedBean.estudiante.apellido}" />
                     <p:outputLabel value="Ingresa direccion" />
-                    <p:inputText value="#{managedEstudiante.estudiante.direccion}" />
+                    <p:inputText value="#{estudinateManagedBean.estudiante.direccion}" />
                     <p:outputLabel value="Carrera" />
-                    <p:inputTextarea value="#{managedEstudiante.estudiante.carrera}" /> 
+                    <p:inputText value="#{estudinateManagedBean.estudiante.carrera}" /> 
                     <p:column/>
-                    <p:commandButton value="Guardar" actionListener="#{managedEstudiante.guardarEstudiante()}"
-                                     update=":estudiante es :msj" oncomplete="PF('java16').hide()"/>
+                    <p:commandButton value="Guardar" actionListener="#{estudinateManagedBean.guardarEstudiante()}"
+                                     update=":estudiante es :msj" rendered="#{estudinateManagedBean.estudiante.id == 0}" oncomplete="PF('java16').hide()"/>
+                    <p:commandButton value="Guardar cambios" actionListener="#{estudinateManagedBean.editarEstudiante()}"
+                                     update=":estudiante es :msj" rendered="#{estudinateManagedBean.estudiante.id !=0 }" oncomplete="PF('java16').hide()"/>
                 </p:panelGrid>
             </h:form>
         </p:dialog>
         <h:form id="estudiante">
             <p:fieldset legend="Datos del estudiante"  toggleable="true">
-                <p:dataTable value="#{managedEstudiante.listaEstudiante}" var="e">
+                <p:dataTable value="#{estudinateManagedBean.listaEstudiante}" var="e">
                     <p:column headerText="ID">
                         <h:outputText value="#{e.id}"/>
                     </p:column>
@@ -53,6 +56,10 @@
 
                     <p:column headerText="Carrera">
                         <h:outputText value="#{e.carrera}"/>
+                    </p:column>
+                    <p:column headerText="Editar">
+                        <p:commandButton value="Editar Estudiante" actionListener="#{estudinateManagedBean.cargarEstudiante(e)}" 
+                                         update=":es" oncomplete="PF('java16').show()"/>
                     </p:column>
                 </p:dataTable>
 

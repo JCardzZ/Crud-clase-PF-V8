@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bean;
+package controller;
 
 import entity.Estudiante;
 import java.util.List;
@@ -20,13 +20,13 @@ import model.EstudianteModel;
  */
 @ManagedBean
 @SessionScoped
-public class ManagedEstudiante {
-    
+public class EstudinateManagedBean {
+
     private List<Estudiante> listaEstudiante;
     private EstudianteModel estudianteModel;
     private Estudiante estudiante;
     String mensaje = "";
-    
+
     public List<Estudiante> getListaEstudiante() throws Exception {
         try {
             this.estudianteModel = new EstudianteModel();
@@ -36,42 +36,62 @@ public class ManagedEstudiante {
         }
         return listaEstudiante;
     }
-    
+
     public void setListaEstudiante(List<Estudiante> listaEstudiante) {
         this.listaEstudiante = listaEstudiante;
     }
-    
+
     public EstudianteModel getEstudianteModel() {
         return estudianteModel;
     }
-    
+
     public void setEstudianteModel(EstudianteModel estudianteModel) {
         this.estudianteModel = estudianteModel;
     }
-    
+
     public Estudiante getEstudiante() {
         return estudiante;
     }
-    
+
     public void setEstudiante(Estudiante estudiante) {
         this.estudiante = estudiante;
     }
-    
+
     @PostConstruct
     public void init() {
         this.estudiante = new Estudiante();
     }
-    
+
     public void guardarEstudiante() {
         try {
             estudianteModel = new EstudianteModel();
             estudianteModel.insertarEstudiante(estudiante);
             estudiante = new Estudiante();
-            mensaje = "¡Estudiante almacenado con exito!";
+            mensaje = "¡Estudiante almacenado con éxito!";
         } catch (Exception e) {
-              System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
         FacesMessage msj = new FacesMessage(mensaje);
         FacesContext.getCurrentInstance().addMessage(null, msj);
+    }
+
+    public void cargarEstudiante(Estudiante es) {
+        this.estudiante = es;
+    }
+
+    public void editarEstudiante() {
+        try {
+            estudianteModel = new EstudianteModel();
+            estudianteModel.actualizarEstudiante(estudiante);
+            estudiante = new Estudiante();
+            mensaje = "¡Estudiante actualizado con éxito!";
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        FacesMessage msj = new FacesMessage(mensaje);
+        FacesContext.getCurrentInstance().addMessage(null, msj);
+    }
+    public void limpiarEstudinate(){
+        estudiante = new Estudiante();
     }
 }
