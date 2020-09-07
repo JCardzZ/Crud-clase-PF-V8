@@ -6,6 +6,7 @@
 package controller;
 
 import entity.Estudiante;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -20,7 +21,7 @@ import model.EstudianteModel;
  */
 @ManagedBean
 @SessionScoped
-public class EstudinateManagedBean {
+public class EstudinateManagedBean implements Serializable {
 
     private List<Estudiante> listaEstudiante;
     private EstudianteModel estudianteModel;
@@ -91,7 +92,24 @@ public class EstudinateManagedBean {
         FacesMessage msj = new FacesMessage(mensaje);
         FacesContext.getCurrentInstance().addMessage(null, msj);
     }
-    public void limpiarEstudinate(){
+
+    public void limpiarEstudinate() {
         estudiante = new Estudiante();
+    }
+
+    public void eliminarEstudiantes(Estudiante es) {
+        try {
+            estudianteModel = new EstudianteModel();
+            estudianteModel.eliminarEstudiante(es);
+            estudiante = new Estudiante();
+            mensaje = "¡Estudiante eliminado con éxito!";
+        } catch (Exception e) {
+            mensaje = "Error: " + e.getMessage();
+            e.printStackTrace();
+        }
+
+        FacesMessage msj = new FacesMessage(mensaje);
+        FacesContext.getCurrentInstance().addMessage(null, msj);
+
     }
 }

@@ -17,24 +17,43 @@ import util.Conexion;
  */
 public class EstudianteModel extends Conexion {
 
-    public void insertarEstudiante(Estudiante estudiante) throws Exception {
+    public void eliminarEstudiante(Estudiante estudiante) throws Exception {
         try {
+
+            String query = "Delete from estudiante where id_estudiante =?";
             conectar();
-            String query = "insert into estudiante (nombre,apellido,direccion,carrera) values (?,?,?,?)";
             PreparedStatement stm = this.getCnx().prepareStatement(query);
-            stm.setString(1, estudiante.getNombre());
-            stm.setString(2, estudiante.getApellido());
-            stm.setString(3, estudiante.getDireccion());
-            stm.setString(4, estudiante.getCarrera());
+            stm.setInt(1, estudiante.getId());
             stm.executeUpdate();
         } catch (Exception e) {
+            System.out.println("error en eliminar estudiante: " + e.getMessage());
             throw e;
-        }finally{
+        } finally {
             desconectar();
         }
     }
-    
-        public void actualizarEstudiante(Estudiante estudiante) throws Exception {
+
+    public void insertarEstudiante(Estudiante estudiante) throws Exception {
+        for (int i = 0; i < 10; i++) {
+            try {
+                conectar();
+                String query = "insert into estudiante (nombre,apellido,direccion,carrera) values (?,?,?,?)";
+                PreparedStatement stm = this.getCnx().prepareStatement(query);
+                stm.setString(1, estudiante.getNombre());
+                stm.setString(2, estudiante.getApellido());
+                stm.setString(3, estudiante.getDireccion());
+                stm.setString(4, estudiante.getCarrera());
+                stm.executeUpdate();
+            } catch (Exception e) {
+                throw e;
+            } finally {
+                desconectar();
+            }
+        }
+
+    }
+
+    public void actualizarEstudiante(Estudiante estudiante) throws Exception {
         try {
             conectar();
             String query = "update estudiante set nombre=?, apellido=?, direccion=?, carrera=? where id_estudiante=?";
@@ -47,7 +66,7 @@ public class EstudianteModel extends Conexion {
             stm.executeUpdate();
         } catch (Exception e) {
             throw e;
-        }finally{
+        } finally {
             desconectar();
         }
     }
@@ -77,4 +96,5 @@ public class EstudianteModel extends Conexion {
         }
         return lista;
     }
+
 }
