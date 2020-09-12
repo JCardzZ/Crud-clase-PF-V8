@@ -16,7 +16,7 @@ public class Conexion {
 /**
  * 
  */
-    private static String bd = "db_estudiante";
+    private static String bd = "db_estudianteAAAAAAAAAAAAAAAAAAAAAAAAAA";
     private static String user = "root";
     private static String pass = "";
     private static String ruta = "jdbc:mysql://localhost:3307/" + bd;

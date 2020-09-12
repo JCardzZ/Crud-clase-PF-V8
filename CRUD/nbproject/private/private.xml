@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/J%20Cardoza/Dropbox/Mi%20PC%20(JCardzZ)/Documents/GitHub/Crud-Clase/Crud-clase-PF-V8/CRUD/src/java/dao/EstudianteDao.java</file>
+            <file>file:/C:/Users/J%20Cardoza/Dropbox/Mi%20PC%20(JCardzZ)/Documents/GitHub/Crud-Clase/Crud-clase-PF-V8/CRUD/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/J%20Cardoza/Dropbox/Mi%20PC%20(JCardzZ)/Documents/GitHub/Crud-Clase/Crud-clase-PF-V8/CRUD/web/index.xhtml</file>
+            <file>file:/C:/Users/J%20Cardoza/Dropbox/Mi%20PC%20(JCardzZ)/Documents/GitHub/Crud-Clase/Crud-clase-PF-V8/CRUD/src/java/controller/EstudianteManagedBean.java</file>
+            <file>file:/C:/Users/J%20Cardoza/Dropbox/Mi%20PC%20(JCardzZ)/Documents/GitHub/Crud-Clase/Crud-clase-PF-V8/CRUD/src/java/model/EntidadEstudiante.java</file>
+        </group>
     </open-files>
 </project-private>

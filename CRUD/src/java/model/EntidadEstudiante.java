@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package model;
 
 /**
  *
  * @author J Cardoza
  */
-public class Estudiantes {
+public class EntidadEstudiante {
  
     private int id;
     private String nombre;
