@@ -9,13 +9,15 @@ package entity;
  *
  * @author J Cardoza
  */
-public class Estudiante {
+public class Estudiantes {
  
     private int id;
     private String nombre;
     private String apellido;
     private String direccion;
     private String carrera;
+
+
 
     public int getId() {
         return id;

@@ -13,7 +13,9 @@ import java.sql.DriverManager;
  * @author J Cardoza
  */
 public class Conexion {
-
+/**
+ * 
+ */
     private static String bd = "db_estudiante";
     private static String user = "root";
     private static String pass = "";

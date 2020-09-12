@@ -5,7 +5,7 @@
  */
 package controller;
 
-import entity.Estudiante;
+import entity.Estudiantes;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -23,12 +23,13 @@ import model.EstudianteModel;
 @SessionScoped
 public class EstudinateManagedBean implements Serializable {
 
-    private List<Estudiante> listaEstudiante;
+    private List<Estudiantes> listaEstudiante;
     private EstudianteModel estudianteModel;
-    private Estudiante estudiante;
+    private Estudiantes estudiante;
     String mensaje = "";
 
-    public List<Estudiante> getListaEstudiante() throws Exception {
+    
+    public List<Estudiantes> getListaEstudiante() throws Exception {
         try {
             this.estudianteModel = new EstudianteModel();
             this.listaEstudiante = this.estudianteModel.listarEstudiante();
@@ -37,8 +38,9 @@ public class EstudinateManagedBean implements Serializable {
         }
         return listaEstudiante;
     }
+    
 
-    public void setListaEstudiante(List<Estudiante> listaEstudiante) {
+    public void setListaEstudiante(List<Estudiantes> listaEstudiante) {
         this.listaEstudiante = listaEstudiante;
     }
 
@@ -50,24 +52,24 @@ public class EstudinateManagedBean implements Serializable {
         this.estudianteModel = estudianteModel;
     }
 
-    public Estudiante getEstudiante() {
+    public Estudiantes getEstudiante() {
         return estudiante;
     }
 
-    public void setEstudiante(Estudiante estudiante) {
+    public void setEstudiante(Estudiantes estudiante) {
         this.estudiante = estudiante;
     }
-
+   
     @PostConstruct
     public void init() {
-        this.estudiante = new Estudiante();
+        this.estudiante = new Estudiantes();
     }
 
     public void guardarEstudiante() {
         try {
             estudianteModel = new EstudianteModel();
             estudianteModel.insertarEstudiante(estudiante);
-            estudiante = new Estudiante();
+            estudiante = new Estudiantes();
             mensaje = "¡Estudiante almacenado con éxito!";
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -76,7 +78,7 @@ public class EstudinateManagedBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msj);
     }
 
-    public void cargarEstudiante(Estudiante es) {
+    public void cargarEstudiante(Estudiantes es) {
         this.estudiante = es;
     }
 
@@ -84,7 +86,7 @@ public class EstudinateManagedBean implements Serializable {
         try {
             estudianteModel = new EstudianteModel();
             estudianteModel.actualizarEstudiante(estudiante);
-            estudiante = new Estudiante();
+            estudiante = new Estudiantes();
             mensaje = "¡Estudiante actualizado con éxito!";
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -94,14 +96,14 @@ public class EstudinateManagedBean implements Serializable {
     }
 
     public void limpiarEstudinate() {
-        estudiante = new Estudiante();
+        estudiante = new Estudiantes();
     }
 
-    public void eliminarEstudiantes(Estudiante es) {
+    public void eliminarEstudiantes(Estudiantes es) {
         try {
             estudianteModel = new EstudianteModel();
             estudianteModel.eliminarEstudiante(es);
-            estudiante = new Estudiante();
+            estudiante = new Estudiantes();
             mensaje = "¡Estudiante eliminado con éxito!";
         } catch (Exception e) {
             mensaje = "Error: " + e.getMessage();
@@ -112,4 +114,5 @@ public class EstudinateManagedBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msj);
 
     }
+     
 }

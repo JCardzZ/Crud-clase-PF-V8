@@ -15,8 +15,9 @@
                 </p:panelGrid>
             </p:fieldset>
         </h:form>
+        
         <p:dialog widgetVar="java16" header="Estudiantes" modal="true" resizable="false" showEffect="clip"> 
-            <p:ajax event="close" listener="#{estudinateManagedBean.limpiarEstudinate()}" update=":es"/>
+            <p:ajax event="close" listener="#{estudinateManagedBean.cargarEstudiante(es)}" update=":es"/>
             <h:form id="es">
                 <p:panelGrid columns="2">
                     <p:outputLabel value="Ingresa nombre"/>
@@ -68,6 +69,12 @@
             </p:fieldset>
 
         </h:form>
+        
+        <!--
+                <p:pieChart model="#{chartJsView.pieModel}" style="width: 100%; height: 500px;"/>
+
+        -->
+
     </h:body>
 </html>
 

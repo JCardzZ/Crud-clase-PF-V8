@@ -5,7 +5,7 @@
  */
 package model;
 
-import entity.Estudiante;
+import entity.Estudiantes;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -17,69 +17,15 @@ import util.Conexion;
  */
 public class EstudianteModel extends Conexion {
 
-    public void eliminarEstudiante(Estudiante estudiante) throws Exception {
+    public ArrayList<Estudiantes> listarEstudiante() throws Exception {
+        ArrayList<Estudiantes> lista = new ArrayList<Estudiantes>();
         try {
-
-            String query = "Delete from estudiante where id_estudiante =?";
-            conectar();
-            PreparedStatement stm = this.getCnx().prepareStatement(query);
-            stm.setInt(1, estudiante.getId());
-            stm.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("error en eliminar estudiante: " + e.getMessage());
-            throw e;
-        } finally {
-            desconectar();
-        }
-    }
-
-    public void insertarEstudiante(Estudiante estudiante) throws Exception {
-        for (int i = 0; i < 10; i++) {
-            try {
-                conectar();
-                String query = "insert into estudiante (nombre,apellido,direccion,carrera) values (?,?,?,?)";
-                PreparedStatement stm = this.getCnx().prepareStatement(query);
-                stm.setString(1, estudiante.getNombre());
-                stm.setString(2, estudiante.getApellido());
-                stm.setString(3, estudiante.getDireccion());
-                stm.setString(4, estudiante.getCarrera());
-                stm.executeUpdate();
-            } catch (Exception e) {
-                throw e;
-            } finally {
-                desconectar();
-            }
-        }
-
-    }
-
-    public void actualizarEstudiante(Estudiante estudiante) throws Exception {
-        try {
-            conectar();
-            String query = "update estudiante set nombre=?, apellido=?, direccion=?, carrera=? where id_estudiante=?";
-            PreparedStatement stm = this.getCnx().prepareStatement(query);
-            stm.setString(1, estudiante.getNombre());
-            stm.setString(2, estudiante.getApellido());
-            stm.setString(3, estudiante.getDireccion());
-            stm.setString(4, estudiante.getCarrera());
-            stm.setInt(5, estudiante.getId());
-            stm.executeUpdate();
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            desconectar();
-        }
-    }
-
-    public ArrayList<Estudiante> listarEstudiante() throws Exception {
-        ArrayList<Estudiante> lista = new ArrayList<Estudiante>();
-        try {
-            String query = "Select * from estudiante";
+            String query = "Select * from estudiantes";
             conectar();
             PreparedStatement smt = this.getCnx().prepareStatement(query);
             ResultSet rt = smt.executeQuery();
             while (rt.next()) {
-                Estudiante estudiante = new Estudiante();
+                Estudiantes estudiante = new Estudiantes();
                 estudiante.setId(rt.getInt("id_estudiante"));
                 estudiante.setNombre(rt.getString("nombre"));
                 estudiante.setApellido(rt.getString("apellido"));
@@ -95,6 +41,58 @@ public class EstudianteModel extends Conexion {
 
         }
         return lista;
+    }
+
+    public void insertarEstudiante(Estudiantes estudiante) throws Exception {
+        try {
+            conectar();
+            String query = "insert into estudiantes (nombre,apellido,direccion,carrera) values (?,?,?,?)";
+            PreparedStatement stm = this.getCnx().prepareStatement(query);
+            stm.setString(1, estudiante.getNombre());
+            stm.setString(2, estudiante.getApellido());
+            stm.setString(3, estudiante.getDireccion());
+            stm.setString(4, estudiante.getCarrera());
+            stm.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            desconectar();
+        }
+
+    }
+
+    public void actualizarEstudiante(Estudiantes estudiante) throws Exception {
+        try {
+            conectar();
+            String query = "update estudiantes set nombre=?, apellido=?, direccion=?, carrera=? where id_estudiante=?";
+            PreparedStatement stm = this.getCnx().prepareStatement(query);
+            stm.setString(1, estudiante.getNombre());
+            stm.setString(2, estudiante.getApellido());
+            stm.setString(3, estudiante.getDireccion());
+            stm.setString(4, estudiante.getCarrera());
+            stm.setInt(5, estudiante.getId());
+            stm.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            desconectar();
+        }
+    }
+
+    public void eliminarEstudiante(Estudiantes estudiante) throws Exception {
+        try {
+
+            String query = "Delete from estudiantes where id_estudiante =?";
+            conectar();
+            PreparedStatement stm = this.getCnx().prepareStatement(query);
+            stm.setInt(1, estudiante.getId());
+            stm.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("error en eliminar estudiante: " + e.getMessage());
+            throw e;
+        } finally {
+            desconectar();
+        }
     }
 
 }
